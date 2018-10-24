@@ -184,23 +184,21 @@
 
 								</div>
 
-								<script>
-								function myMap() {
-								    var mapOptions = {
-								        center: new google.maps.LatLng(47.241389 ,-122.459444),
-								        zoom: 10,
-								        mapTypeId: google.maps.MapTypeId.HYBRID
-								    }
-								var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+							<script>
+								// Initialize and add the map
+								function initMap() {
+								  // The location of Uluru
+								  var uluru = {lat: 47.2446 , lng:-122.4376};
+								  // The map, centered at Uluru
+								  var map = new google.maps.Map(
+								      document.getElementById('map'), {zoom: 10, center: uluru});
+								  // The marker, positioned at Uluru
+								  var marker = new google.maps.Marker({position: uluru, map: map, title: "University of Washington"});
 								}
-								 var marker = new google.maps.Map({
-						          position: myMap,
-						          map: Map,
-						          title: 'University of Washington Tacoma'
-						        });
-							</script>
-
-								<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNlAOsPAUaZkmI5q1fsZ1XiTONGUQihs&callback=myMap"></script>
+								    </script>
+								    <script async defer
+								    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNlAOsPAUaZkmI5q1fsZ1XiTONGUQihs&callback=initMap">
+								    </script>
 							<p>&copy; Robert Kariuki. Design: <a href="https://html5up.net">Source Code</a>.</p>
 						</div>
 					</footer>
