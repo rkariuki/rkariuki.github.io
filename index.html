@@ -1,3 +1,8 @@
+<?php
+if($_POST["message"]) {
+    mail("kariuki.robert68@gmail.com", "Form to email message", $_POST["message"], "From: an@email.address");
+}
+?>
 <!DOCTYPE HTML>
 <!--
 	Robert Kariuki
@@ -27,7 +32,7 @@
 							</ul>
 						</div>
 						<div class="image">
-							<img src="Rainer.jpg" alt="" />
+							<img src="MtRainer.jpg" alt="" />
 						</div>
 					</section>
 
@@ -37,7 +42,7 @@
 							<h2>Life after Graduation </h2>
 							<p>After graduating with a BS  Computer Science from the University of Washington Tacoma, I got to work with Starbucks as a system Analyst. Working there was quite an experience from the collegues and the problem solving challenges. </p>
 							<ul class="actions stacked">
-								<li><a href="https://starbucks.taleo.net/careersection/1000222/jobsearch.ftl?lang=en&LOCATION=200000194&keyword=&searchCategory=corporate" class="button">Learn More</a></li>
+								<li><a href="http://www.tacoma.uw.edu/set/bs-or-ba-computer-science-systems" class="button">Learn More</a></li>
 							</ul>
 						</div>
 						<div class="image">
@@ -144,7 +149,7 @@
 					<section class="wrapper style1 align-center">
 						<div class="inner medium">
 							<h2>Get in touch</h2>
-							<form method="post" action="#">
+							<form method="post" action="contact.php">
 								<div class="fields">
 									<div class="field half">
 										<label for="name">Name</label>
@@ -171,34 +176,35 @@
 					<footer class="wrapper style1 align-center">
 						<div class="inner">
 							<ul class="icons">
-								<li><a href="https://Twitter.com" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="https://facebook.com" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+								<li><a href="https://https://twitter.com/Robertkariuki82" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="http://facebook.com/mureithirobertkariuki" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
 								<li><a href="https://Instagram.com" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
 								<li><a href="https://LinkedIn.com" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
 								<li><a href="https://gmail.com" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
 
 							</ul>
 								</div>
-
+								<section class="wrapper style1 align-center">
 								<div id="map" style="width:1850px;height:900px;">
 
 								</div>
 
-							<script>
+								<script>
 								// Initialize and add the map
 								function initMap() {
-								  // The location of Uluru
-								  var uluru = {lat: 47.2446 , lng:-122.4376};
-								  // The map, centered at Uluru
+								  // The location of Latlng 
+								  var latlng = {lat: 47.2446 , lng:-122.4376};
+								  // The map, centered at latlng
 								  var map = new google.maps.Map(
-								      document.getElementById('map'), {zoom: 10, center: uluru});
-								  // The marker, positioned at Uluru
-								  var marker = new google.maps.Marker({position: uluru, map: map, title: "University of Washington"});
+								      document.getElementById('map'), {zoom: 10, center: latlng});
+								  // The marker, positioned at latlng 
+								  var marker = new google.maps.Marker({position: latlng, map: map, title: "university of Washington"});
 								}
 								    </script>
 								    <script async defer
 								    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNlAOsPAUaZkmI5q1fsZ1XiTONGUQihs&callback=initMap">
 								    </script>
+								</section>
 							<p>&copy; Robert Kariuki. Design: <a href="https://html5up.net">Source Code</a>.</p>
 						</div>
 					</footer>
