@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Lab4</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" 
+	integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" 
+	crossorigin="">
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" 
+	integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" 
+	crossorigin=""></script>
+	<script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js"></script>
+   
+    <style>
+
+        body { margin:0; padding:0; }
+        #map {position: absolute; height: 600px; width: 1800px}
+       
+      
+
+   
+
+    .bottomleftmapclass{
+    	height: 50%;
+    	width: 86%;
+    	top:80%;
+    	right: 10%;
+    	position: absolute;
+    	z-index: 200;
+    }
+    </style>
+</head>
+<body>
+	
+
+  	
+  </script>
+
+ 
+
+<h1>Earthquakes around the world and Winter Weather forecast.</h1>
+<p> Map one detils earthquakes around the world. It also gives different basemap  displays. </p>
+<p> Map 2 gives details on latest winter weather forecasts.</p>
+<div id='map'></div>
+<div id='bottomleftmap' class='bottomleftmapclass'></div>
+ 
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoicm9iZXJrODIiLCJhIjoiY2pvNmc5aHV1MDQyeTNwb2p3eTNwMDFmMCJ9.rNtyqnKwRZNmJsSvvROKJg';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [-120, 50], // starting position
+    zoom: 2 // starting zoom
+});
+
+
+
+//on map load, do some stuff
+				map.on('load', function(){
+				//add a source layer for earthquakes
+				
+			map.addSource('earthquakes', {
+			        "type": "geojson",
+			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+			    });
+			    //add the earthquakes to the map
+			    map.addLayer({
+			    	"id":"equakes",
+			    	"type":"circle",
+			    	"source":"earthquakes"
+			    });
+				//add a handler for clicking/popups 
+				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+				map.on('click', 'equakes', function (e) {
+			        var coordinates = e.features[0].geometry.coordinates.slice();
+			        //print the properties to the console when clicked
+			       // console.log(e.features[0].properties);
+			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
+			        var description = "<p>Magnitude: "+e.features[0].properties.mag+"<br>Location: "+e.features[0].properties.place+"<br> URL: <a target= '_blank' href= '"+e.features[0].properties.url+"'> more information</a> </p>";
+			        //var description = e.features[0].properties.mag;
+
+			        // Ensure that if the map is zoomed out such that multiple
+			        // copies of the feature are visible, the popup appears
+			        // over the copy being pointed to.
+			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        }
+			        //make the popup
+			        new mapboxgl.Popup()
+			            .setLngLat(coordinates)
+			            .setHTML(description)
+			            .addTo(map);
+
+			    });
+			    map.setCenter([-120, 50]);
+			});			
+
+
+
+		
+map.addControl(new mapboxgl.NavigationControl() );
+
+// map 2 
+
+			//basemap from https://leaflet-extras.github.io/leaflet-providers/preview/ 
+			var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+			});
+			var map2 = new L.Map("bottomleftmap", {
+				center: new L.LatLng(37.7, -122.4),
+				zoom: 12
+			});
+			map2.addLayer(OpenStreetMap_Mapnik);
+
+			//add a KML layer - uses cors-anywhere to bypass the CORS restrictions on NOAA. TEMPORARY WORKAROUND, Eventually need to hook up a server instead of doing it this way. 
+			var snowPoly = omnivore.kml('https://cors-anywhere.herokuapp.com/https://www.wpc.ncep.noaa.gov/kml/winwx/Day3_psnow_gt_04inches.kml')
+				.on('ready', function() {
+			        map2.fitBounds(snowPoly.getBounds());
+			    })
+			.addTo(map2);
+
+			
+  
+
+</script>
+
+
+
+</body>
+
+
+
+</html>
