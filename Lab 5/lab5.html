@@ -1,0 +1,123 @@
+<!DOCTYPE html >
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+ 
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+	
+   <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+  
+    <style>
+        body { margin:0; padding:0; }
+      body {
+    overflow: hidden;
+}
+
+body * {
+   -webkit-touch-callout: none;
+     -webkit-user-select: none;
+        -moz-user-select: none;
+         -ms-user-select: none;
+             user-select: none;
+}
+
+.map { position: absolute; height: 500px; width: 800px;
+
+	}
+	    
+    </style>
+  
+    <div id="header">
+		<div id="logo">
+			<h1><a href="#">Endangered Species and Plants</a></h1>
+		</div>
+	</div>
+	<div id="banner"><img src="images/endangered.jpg" width="900" height="400" alt="" /></div>
+
+	<div id="page">
+		<div class="featured-post">
+			<h2 class="title">Endangered Species </h2>
+			<p>When air, land, water, plants and animals support each other in a healthy environmental system, all species, including humans, flourish. Alone among the animals, humans have the power to throw the system out of balance and to damage key elements in the web of life beyond repair.
+
+But the same knowledge and technology that make humans uniquely destructive also gives us the ability to prevent damage to the environment. Furthermore, it gives us the ability to care for the environmental support system on which our very survival depends.
+
+DEC's Endangered Species Program focuses on the most sensitive elements in the system. It is designed to find and correct fish or wildlife problems before certain species are gone forever. </p>
+		</div>
+</head>
+<body>
+	
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css' type='text/css' />
+
+<div id='before' class='map'></div>
+<div id='after' class='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoicm9iZXJrODIiLCJhIjoiY2pvNmc5aHV1MDQyeTNwb2p3eTNwMDFmMCJ9.rNtyqnKwRZNmJsSvvROKJg';
+var beforeMap = new mapboxgl.Map({
+    container: 'before',
+    style: 'mapbox://styles/mapbox/light-v9',
+    center: [0, 0],
+    zoom: 0
+});
+
+	beforeMap.on('load', function(){
+				//add a source layer for Biodiversity by County - Distribution of Animals, Plants and Natural Communities
+				
+			beforeMap.addSource('Biodiversity by County - Distribution of Animals, Plants and Natural Communities', {
+			        "type": "geojson",
+			        "data": "https://data.ny.gov/api/views/tk82-7km5/rows.json?accessType=DOWNLOAD"
+			    });
+			    //add the Biodiversity by County - Distribution of Animals, Plants and Natural Communities to the map
+			    beforeMap.addLayer({
+			    	"id":"endanger",
+			    	"type":"circle",
+			    	"source":"Biodiversity by County - Distribution of Animals, Plants and Natural Communities"
+			    });
+				//add a handler for clicking/popups 
+				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+				beforeMap.on('click', 'endanger', function (e) {
+			        var coordinates = e.features[0].geometry.coordinates.slice();
+			        //print the properties to the console when clicked
+			       // console.log(e.features[0].properties);
+			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
+			        var description = "<p>Magnitude: "+e.features[0].properties.mag+"<br>Location: "+e.features[0].properties.place+"<br> URL: <a target= '_blank' href= '"+e.features[0].properties.url+"'> more information</a> </p>";
+			        //var description = e.features[0].properties.mag;
+			        // Ensure that if the map is zoomed out such that multiple
+			        // copies of the feature are visible, the popup appears
+			        // over the copy being pointed to.
+			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        }
+			        //make the popup
+			        new mapboxgl.Popup()
+			            .setLngLat(coordinates)
+			            .setHTML(description)
+			            .addTo(beforeMap);
+			    });
+			    beforeMap.setCenter([-120, 50]);
+			});
+
+var afterMap = new mapboxgl.Map({
+    container: 'after',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [0, 0],
+    zoom: 0
+});
+
+var map = new mapboxgl.Compare(beforeMap, afterMap, {
+    // Set this to enable comparing two maps by mouse movement:
+    // mousemove: true
+});
+
+
+
+
+</script>
+ 
+
+</body>
+
+</html>
