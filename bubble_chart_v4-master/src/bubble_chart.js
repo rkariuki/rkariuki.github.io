@@ -110,10 +110,10 @@ function bubbleChart() {
         id: d.id,
         radius: radiusScale(+d.Amount),
         value: +d.Amount,
-        name: d.Name,
-        org: d.State,
-        group: d.District,
-        //year: d.start_year,
+        Name: d.Name,
+        State: d.State,
+        District: d.District,
+        Party: d.Party,
         x: Math.random() * 900,
         y: Math.random() * 800
       };
