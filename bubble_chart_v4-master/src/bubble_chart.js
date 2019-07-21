@@ -243,7 +243,7 @@ function bubbleChart() {
    * Hides Year title displays.
    */
   function hideYearTitles() {
-    svg.selectAll('.year').remove();
+    svg.selectAll('.Amount').remove();
   }
 
   /*
@@ -253,7 +253,7 @@ function bubbleChart() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
     var yearsData = d3.keys(yearsTitleX);
-    var years = svg.selectAll('.year')
+    var years = svg.selectAll('.Amount')
       .data(yearsData);
 
     years.enter().append('text')
@@ -305,7 +305,7 @@ function bubbleChart() {
    * displayName is expected to be a string and either 'year' or 'all'.
    */
   chart.toggleDisplay = function (displayName) {
-    if (displayName === 'year') {
+    if (displayName === 'Amount') {
       splitBubbles();
     } else {
       groupBubbles();
@@ -378,7 +378,7 @@ function addCommas(nStr) {
 }
 
 // Load the data.
-d3.csv('data/gates_money.csv', display);
+d3.csv('data/Polit.csv', display);
 
 // setup the buttons.
 setupButtons();
