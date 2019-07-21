@@ -108,12 +108,12 @@ function bubbleChart() {
     var myNodes = rawData.map(function (d) {
       return {
         id: d.id,
-        radius: radiusScale(+d.Amount),
-        value: +d.Amount,
-        Name: d.Name,
-        State: d.State,
-        District: d.District,
-        Party: d.Party,
+        radius: radiusScale(+d.total_amount),
+        value: +d.total_amount,
+        name: d.grant_title,
+        org: d.organization,
+        group: d.group,
+        year: d.start_year,
         x: Math.random() * 900,
         y: Math.random() * 800
       };
@@ -243,7 +243,7 @@ function bubbleChart() {
    * Hides Year title displays.
    */
   function hideYearTitles() {
-    svg.selectAll('.Amount').remove();
+    svg.selectAll('.year').remove();
   }
 
   /*
@@ -253,7 +253,7 @@ function bubbleChart() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
     var yearsData = d3.keys(yearsTitleX);
-    var years = svg.selectAll('.Amount')
+    var years = svg.selectAll('.year')
       .data(yearsData);
 
     years.enter().append('text')
@@ -305,7 +305,7 @@ function bubbleChart() {
    * displayName is expected to be a string and either 'year' or 'all'.
    */
   chart.toggleDisplay = function (displayName) {
-    if (displayName === 'Amount') {
+    if (displayName === 'year') {
       splitBubbles();
     } else {
       groupBubbles();
@@ -378,7 +378,7 @@ function addCommas(nStr) {
 }
 
 // Load the data.
-d3.csv('data/Polit.csv', display);
+d3.csv('data/gates_money.csv', display);
 
 // setup the buttons.
 setupButtons();
