@@ -93,7 +93,7 @@ function bubbleChart() {
   function createNodes(rawData) {
     // Use the max total_amount in the data as the max in the scale's domain
     // note we have to ensure the total_amount is a number.
-    var maxAmount = d3.max(rawData, function (d) { return +d.total_amount; });
+    var maxAmount = d3.max(rawData, function (d) { return +d.Amount; });
 
     // Sizes bubbles based on area.
     // @v4: new flattened scale names.
@@ -107,13 +107,16 @@ function bubbleChart() {
     // working with data.
     var myNodes = rawData.map(function (d) {
       return {
-        id: d.id,
-        radius: radiusScale(+d.total_amount),
-        value: +d.total_amount,
-        name: d.grant_title,
-        org: d.organization,
-        group: d.group,
-        year: d.start_year,
+        //id: d.id,
+        radius: radiusScale(+d.Amount),
+        value: +d.Amount,
+        value2: +d.firstamount,
+        Value3: +d.secondamount,
+        name: d.Name,
+        Dist: d.District
+        org: d.Party,
+        group: d.state,
+        year: d.year,
         x: Math.random() * 900,
         y: Math.random() * 800
       };
@@ -378,7 +381,7 @@ function addCommas(nStr) {
 }
 
 // Load the data.
-d3.csv('data/gates_money.csv', display);
+d3.csv('data/Polit.csv', display);
 
 // setup the buttons.
 setupButtons();
