@@ -54,7 +54,7 @@ function bubbleChart() {
   // @v4 Before the charge was a stand-alone attribute
   //  of the force layout. Now we can use it as a separate force!
   function charge(d) {
-    return -Math.pow(d.radius, 1.0) * forceStrength;
+    return -Math.pow(d.radius, 3.0) * forceStrength;
   }
 
   // Here we create a force layout and
@@ -205,7 +205,7 @@ function bubbleChart() {
    * x force.
    */
   function nodeYearPos(d) {
-    return yearCenters[d.year].x;
+    return yearCenters[d.Amount].x;
   }
 
 
