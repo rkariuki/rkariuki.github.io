@@ -73,7 +73,7 @@ function bubbleChart() {
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
     .domain(['Republican', 'Democratic'])
-    .range(['#d84b2a', '#beccae']);
+    .range(['#d84b2a', '#9bc3df']);
 
 
   /*
