@@ -28,7 +28,7 @@ function bubbleChart() {
   var yearsTitleX = {
     2016: 160,
     //2009: width / 2,
-    2018: width /2,
+    2018: width-160,
   };
 
   // @v4 strength to apply to the position forces
