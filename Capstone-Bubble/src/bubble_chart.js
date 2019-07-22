@@ -8,8 +8,8 @@
  */
 function bubbleChart() {
   // Constants for sizing
-  var width = 1000;
-  var height = 700;
+  var width = 940;
+  var height = 600;
 
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('gates_tooltip', 240);
@@ -19,16 +19,16 @@ function bubbleChart() {
   var center = { x: width / 2, y: height / 2 };
 
   var yearCenters = {
-    2016: { x: width / 3, y: height / 2 },
-    //2009: { x: width / 2, y: height / 2 },
-    2018: { x: 2 * width / 3, y: height / 2 }
+    2008: { x: width / 3, y: height / 2 },
+    2009: { x: width / 2, y: height / 2 },
+    2010: { x: 2 * width / 3, y: height / 2 }
   };
 
   // X locations of the year titles.
   var yearsTitleX = {
-    2016: 160,
-    //2009: width / 2,
-    2018: width - 160,
+    2008: 160,
+    2009: width / 2,
+    2010: width - 160
   };
 
   // @v4 strength to apply to the position forces
@@ -110,8 +110,6 @@ function bubbleChart() {
         //id: d.id,
         radius: radiusScale(+d.Amount),
         value: +d.Amount,
-        radius: radiusScale(+d.firstmount),//changed
-        radius: radiusScale(+d.secondamount),
         value2: +d.firstamount,
         Value3: +d.secondamount,
         name: d.Name,
