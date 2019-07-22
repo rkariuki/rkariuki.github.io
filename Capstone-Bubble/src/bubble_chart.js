@@ -20,15 +20,13 @@ function bubbleChart() {
 
   var yearCenters = {
     2016: { x: width / 3, y: height / 2 },
-    //2009: { x: width / 2, y: height / 2 },
-    2018: { x: 2 * width / 3, y: height / 2 }
+    2018: { x: width / 2, y: height / 2 }
   };
 
   // X locations of the year titles.
   var yearsTitleX = {
     2016: 160,
-    //2009: width / 2,
-    2018: width-160,
+    2018: width / 2
   };
 
   // @v4 strength to apply to the position forces
@@ -54,7 +52,7 @@ function bubbleChart() {
   // @v4 Before the charge was a stand-alone attribute
   //  of the force layout. Now we can use it as a separate force!
   function charge(d) {
-    return -Math.pow(d.radius, 1.0) * forceStrength;
+    return -Math.pow(d.radius, 2.0) * forceStrength;
   }
 
   // Here we create a force layout and
@@ -62,7 +60,7 @@ function bubbleChart() {
   //  add forces to it.
   var simulation = d3.forceSimulation()
     .velocityDecay(0.2)
-    .force('x', d3.forceX().strength(forceStrength).x(center.x))
+    /*.force('x', d3.forceX().strength(forceStrength).x(center.x))*/
     .force('y', d3.forceY().strength(forceStrength).y(center.y))
     .force('charge', d3.forceManyBody().strength(charge))
     .on('tick', ticked);
@@ -74,8 +72,8 @@ function bubbleChart() {
   // Nice looking colors - no reason to buck the trend
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
-    .domain(['low', 'medium', 'high'])
-    .range(['#d84b2a', '#beccae', '#7aa25c']);
+    .domain(['Republican', 'Democratic'])
+    .range(['#d84b2a', '#beccae']);
 
 
   /*
@@ -99,7 +97,7 @@ function bubbleChart() {
     // @v4: new flattened scale names.
     var radiusScale = d3.scalePow()
       .exponent(0.5)
-      .range([2, 85])
+      .range([2, 50])
       .domain([0, maxAmount]);
 
     // Use map() to convert raw data into node data.
@@ -115,7 +113,7 @@ function bubbleChart() {
         name: d.Name,
         Dist: d.District,
         org: d.Party,
-        group: d.state,
+        group: d.Party,
         year: d.year,
         x: Math.random() * 900,
         y: Math.random() * 800
@@ -154,7 +152,7 @@ function bubbleChart() {
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
-      .data(nodes, function (d) { return d.Name; });
+      .data(nodes, function (d) { return d.id; });
 
     // Create new circle elements each with class `bubble`.
     // There will be one circle.bubble for each object in the nodes array.
@@ -164,7 +162,7 @@ function bubbleChart() {
     var bubblesE = bubbles.enter().append('circle')
       .classed('bubble', true)
       .attr('r', 0)
-      .attr('fill', function (d) { return fillColor(d.group); })
+      .attr('fill', function (d) { return d3.rgb(fillColor(d.group)); })
       .attr('stroke', function (d) { return d3.rgb(fillColor(d.group)).darker(); })
       .attr('stroke-width', 2)
       .on('mouseover', showDetail)
@@ -177,7 +175,12 @@ function bubbleChart() {
     // correct radius
     bubbles.transition()
       .duration(2000)
-      .attr('r', function (d) { return d.radius; });
+      .attr('r', function (d) { 
+	  
+	  
+	  return d.radius; 
+	  
+	  });
 
     // Set the simulation's nodes to our newly created nodes array.
     // @v4 Once we set the nodes, the simulation will start running automatically!
@@ -196,8 +199,31 @@ function bubbleChart() {
    */
   function ticked() {
     bubbles
-      .attr('cx', function (d) { return d.x; })
-      .attr('cy', function (d) { return d.y; });
+      .attr('cx', function (d) { 
+		/*
+		while (d.x < d.radius + 20){
+			d.x = d.x + 1;
+		}
+		while (d.x + d.radius > width - 20){
+			d.x = d.x - 1;
+		}
+		*/
+		return d.x; 		
+		})
+      .attr('cy', function (d) { 
+		/*
+		while (d.y < d.radius){
+			d.y = d.y + 1;
+		}
+		
+		while (d.y + d.radius > height - 20){
+			d.y = d.y - 1;
+		}
+		*/
+	  return d.y; 
+	  
+	  
+	  });
   }
 
   /*
@@ -205,7 +231,7 @@ function bubbleChart() {
    * x force.
    */
   function nodeYearPos(d) {
-    return yearCenters[d.Amount].x;
+    return yearCenters[d.year].x;
   }
 
 
