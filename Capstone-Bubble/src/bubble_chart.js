@@ -18,15 +18,17 @@ function bubbleChart() {
   // on which view mode is selected.
   var center = { x: width / 2, y: height / 2 };
 
-  var yearCenters = {
-    2016: { x: width / 3, y: height / 2 },
-    2018: { x: width / 2, y: height / 2 }
+  var partyCenters = {
+	Republican: { x: width / 3, y: height / 2 },
+    Democratic: { x: width / 2, y: height / 2 },
+    Independent: { x: 2 * width / 3, y: height / 2 }
   };
 
   // X locations of the year titles.
   var yearsTitleX = {
-    2016: 160,
-    2018: width / 2
+	Republican: 160,
+    Democratic: width / 2,
+    Independent: width - 160
   };
 
   // @v4 strength to apply to the position forces
@@ -72,8 +74,8 @@ function bubbleChart() {
   // Nice looking colors - no reason to buck the trend
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
-    .domain(['Republican', 'Democratic'])
-    .range(['#d84b2a', '#9bc3df']);
+    .domain(['Republican', 'Democratic', 'Independent'])
+    .range(['#d84b2a', '#9bc3df', '#72dd21']);
 
 
   /*
@@ -200,18 +202,18 @@ function bubbleChart() {
   function ticked() {
     bubbles
       .attr('cx', function (d) { 
-		/*
+		
 		while (d.x < d.radius + 20){
 			d.x = d.x + 1;
 		}
 		while (d.x + d.radius > width - 20){
 			d.x = d.x - 1;
 		}
-		*/
+		
 		return d.x; 		
 		})
       .attr('cy', function (d) { 
-		/*
+		
 		while (d.y < d.radius){
 			d.y = d.y + 1;
 		}
@@ -219,7 +221,7 @@ function bubbleChart() {
 		while (d.y + d.radius > height - 20){
 			d.y = d.y - 1;
 		}
-		*/
+		
 	  return d.y; 
 	  
 	  
@@ -230,8 +232,8 @@ function bubbleChart() {
    * Provides a x value for each node to be used with the split by year
    * x force.
    */
-  function nodeYearPos(d) {
-    return yearCenters[d.year].x;
+  function nodePartyPos(d) {
+	  return partyCenters[d.group].x;    
   }
 
 
@@ -262,7 +264,7 @@ function bubbleChart() {
     showYearTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodePartyPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
