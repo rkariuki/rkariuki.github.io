@@ -8,8 +8,8 @@
  */
 function bubbleChart() {
   // Constants for sizing
-  var width = 800;
-  var height = 500;
+  var width = 1000;
+  var height = 700;
 
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('gates_tooltip', 240);
