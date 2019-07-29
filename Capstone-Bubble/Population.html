@@ -85,7 +85,7 @@
 		 
 		queue()
 		 .defer(d3.json, "us.json")
-		 .defer(d3.csv, "data.csv")
+		 .defer(d3.csv, "Population_Deaths-Capstone.csv")
 		 .await(ready);
 		 
 		function ready(error, us, data) {
@@ -110,8 +110,8 @@
 		};
 
 		data.forEach(function(d) {
-		 pairRateWithId[d.id] = +d.rate;
-		 pairNameWithId[d.id] = d.name;
+		 pairRateWithId[d.id] = +d.VALUE;
+		 pairNameWithId[d.id] = d.District;
 		 });
 		 svg.append("g")
 		 .attr("class", "county")
