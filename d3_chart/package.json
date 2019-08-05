@@ -1,0 +1,14 @@
+{
+  "name": "@mbostock/threshold-choropleth",
+  "main": "@d3/threshold-choropleth.js",
+  "version": "180.0.0",
+  "homepage": "https://observablehq.com/@mbostock/threshold-choropleth",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "https://observablehq.com/@mbostock"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}
