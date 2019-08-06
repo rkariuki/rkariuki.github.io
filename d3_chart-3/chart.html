@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="./inspector.css">
+<body>
+
+<div class="container">
+
+
+	<script type="module">
+
+	import {Runtime, Inspector} from "./runtime.js";
+	import define from "./@d3/threshold-choropleth.js";
+
+	const runtime = new Runtime();
+	const main = runtime.module(define, Inspector.into(document.body));
+	
+	</script>
+
+</div>
+</body>
+</html>
