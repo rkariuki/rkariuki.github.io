@@ -72,7 +72,7 @@ md``
 
 
   main.variable(observer("data")).define("data", ["d3"], async function(d3){return(
-Object.assign(new Map(await d3.csv("../d3_chart/Billiard.csv", ({Name,id,Total_YEA,Total_NAY}) =>
+Object.assign(new Map(await d3.csv("../d3_chart/Billiard2.csv", ({Name,id,Total_YEA,Total_NAY}) =>
  [id, Name + ', Total yea: ' + Total_YEA + ', Total nay: ' + Total_NAY])), {title: ""})
 )});
 
