@@ -146,18 +146,20 @@ function ready(error, us, maptemplate) {
   console.log(us, maptemplate);   
 
   //Sets color scale
-  var numMedian = d3.median(maptemplate, function(d) { return d.num;}); 
+  var numMedian = d3.median(maptemplate, function(d) { return d.Total_YEA;}); 
   var quantize = d3.scale.quantize()
     .domain([0, numMedian])
     .range(d3.range(5).map(function(i) { return "q" + i + "-9"; }));
  
   //Pair data with state id
   var dataByFIPS = {};
-  maptemplate.forEach(function(d) { dataByFIPS[d.FIPS] = +d.num; });
+  maptemplate.forEach(function(d) { dataByFIPS[d.FIPS] = +d.Total_YEA; });
 
+  var dataByFIPS = {};
+  maptemplate.forEach(function(d) { dataByFIPS[d.FIPS] = +d.Total_NAY; });
   //Pair state name with state id
   var stateByFIPS = {};
-  maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.state; });
+  maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.Name; });
 
   //Appends chart headline
   d3.select(".g-hed").text("Map headline goes here");
