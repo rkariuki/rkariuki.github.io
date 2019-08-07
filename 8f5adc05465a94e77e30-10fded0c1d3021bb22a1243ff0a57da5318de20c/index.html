@@ -159,7 +159,7 @@ function ready(error, us, maptemplate) {
   maptemplate.forEach(function(d) { dataByFIPS[d.FIPS] = +d.Total_NAY; });
   //Pair state name with state id
   var stateByFIPS = {};
-  maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.Name; });
+  maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.State; });
 
   //Appends chart headline
   d3.select(".g-hed").text("Map headline goes here");
