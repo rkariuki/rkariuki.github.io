@@ -211,11 +211,11 @@ function ready(error, us, maptemplate) {
   var stateByFIPS = {};
   maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.state; });
 
-  //Appends chart headline
-  d3.select(".g-hed").text("");
+ //Appends chart headline
+  d3.select(".g-hed").text("Map that shows total of YEA and NAY froma all Opioid Bills");
 
   //Appends chart intro text
-  d3.select(".g-intro").text("");
+  d3.select(".g-intro").text("Map shows two colors red and green signifying NAY and YEA");
 
   //Append states
   map.append("g")
