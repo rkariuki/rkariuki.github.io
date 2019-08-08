@@ -157,7 +157,7 @@ var map = d3.select(".g-chart").append("svg")
 //Load the files
 queue()
     .defer(d3.json, "us.json")
-    .defer(d3.csv, "maptemplate_new.csv")
+    .defer(d3.csv, "data/maptemplate_new.csv")
     .await(ready);
 
 //Moves selection to front
@@ -258,7 +258,7 @@ function ready(error, us, maptemplate) {
 
   //Appends chart source
   d3.select(".g-source-bold")
-    .text("")
+    .text("Congress.gov")
     .attr("class", "g-source-bold");
 
   d3.select(".g-source-reg")
