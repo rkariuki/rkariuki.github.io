@@ -212,7 +212,7 @@ function ready(error, us, maptemplate) {
   maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.state; });
 
  //Appends chart headline
-  d3.select(".g-hed").text("Map that shows total of YEA and NAY froma all Opioid Bills");
+  d3.select(".g-hed").text("Map that shows total of YEA and NAY from all Opioid Bills");
 
   //Appends chart intro text
   d3.select(".g-intro").text("Map shows two colors red and green signifying NAY and YEA");
