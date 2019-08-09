@@ -120,7 +120,7 @@ var map = d3.select(".g-chart").append("svg")
 //Load the files
 queue()
     .defer(d3.json, "us.json")
-    .defer(d3.csv, "maptemplate5.csv")
+    .defer(d3.csv, "data/maptemplate5.csv")
     .await(ready);
 
 //Moves selection to front
@@ -163,7 +163,7 @@ function ready(error, us, maptemplate) {
   maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.state; });
 
   //Appends chart headline
-  d3.select(".g-hed").text("");
+  d3.select(".g-hed").text("Map that shows Population Drug-related Deaths by state");
 
   //Appends chart intro text
   d3.select(".g-intro").text("");
