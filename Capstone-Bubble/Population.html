@@ -40,17 +40,17 @@ body {
   stroke-linejoin: round;
 }
 
-.q0-9 { fill: #FF8C00; }
-.q1-9 { fill: #FF7F50; }
+.q0-9 { fill: #8B0000; }
+.q1-9 { fill: #B22222; }
 .q2-9 { fill: #FF6347; }
-.q3-9 { fill: #B22222; }
-.q4-9 { fill: #8B0000; }
+.q3-9 { fill: #FF7F50; }
+.q4-9 { fill: #FF8C00; }
 
-#q0-9 { background-color: #FF8C00; }
-#q1-9 { background-color: #FF7F50; }
+#q0-9 { background-color: #8B0000; }
+#q1-9 { background-color: #B22222; }
 #q2-9 { background-color: #FF6347; }
-#q3-9 { background-color: #B22222; }
-#q4-9 { background-color: #8B0000; }
+#q3-9 { background-color: #FF7F50; }
+#q4-9 { background-color: #FF8C00; }
 
 div.tooltip {
   position: absolute;
@@ -163,10 +163,10 @@ function ready(error, us, maptemplate) {
   maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.state; });
 
   //Appends chart headline
-  d3.select(".g-hed").text("Map that shows Population Drug-related Deaths by state");
+  d3.select(".g-hed").text("Map that shows Population Opioid-related Deaths by state");
 
   //Appends chart intro text
-  d3.select(".g-intro").text("");
+  d3.select(".g-intro").text("Inversed color ramp high population deaths shows lighter color than other states with less population deaths.");
 
   //Append states
   map.append("g")
@@ -200,7 +200,7 @@ function ready(error, us, maptemplate) {
 
   //Appends chart source
   d3.select(".g-source-bold")
-    .text("")
+    .text(" CDC.gov")
     .attr("class", "g-source-bold");
 
   d3.select(".g-source-reg")
