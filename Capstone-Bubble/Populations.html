@@ -45,13 +45,14 @@ body {
 .q2-9 { fill: #EA0037; }
 .q3-9 { fill: #B40098; }
 .q4-9 { fill: #E8713E; }
-
+.q5-9 { fill: #D4BA6A; }
+  
 #q0-9 { background-color: #C0F400; }
 #q1-9 { background-color: #53DF00; }
 #q2-9 { background-color: #EA0037; }
 #q3-9 { background-color: #B40098; }
 #q4-9 { background-color: #E8713E; }
-
+#q5-9 { background-color: #D4BA6A; }
 div.tooltip {
   position: absolute;
   left: 75px;
@@ -152,7 +153,7 @@ function ready(error, us, maptemplate) {
   
   var quantize = d3.scale.quantize()
     .domain([0, numMedian])
-    .range(d3.range(5).map(function(i) { return "q" + i + "-9"; }));
+    .range(d3.range(6).map(function(i) { return "q" + i + "-9"; }));
  
   //Pair data with state id
   var dataByFIPS = {};
