@@ -41,16 +41,16 @@ body {
 }
 
 .q0-9 { fill: #FFEAAA; }
-.q1-9 { fill: #99b2dc; }
-.q2-9 { fill: #5e8dc9; }
-.q3-9 { fill: #2f5491; }
-.q4-9 { fill: #f98a98; }
+.q1-9 { fill: #AA8E39; }
+.q2-9 { fill: #96A537; }
+.q3-9 { fill: #68266F; }
+.q4-9 { fill: #353337; }
 
-#q0-9 { background-color: #d9e0f2; }
-#q1-9 { background-color: #99b2dc; }
-#q2-9 { background-color: #5e8dc9; }
-#q3-9 { background-color: #2f5491; }
-#q4-9 { background-color: #0e2344; }
+#q0-9 { background-color: #FFEAAA; }
+#q1-9 { background-color: #AA8E39; }
+#q2-9 { background-color: #96A537; }
+#q3-9 { background-color: #68266F; }
+#q4-9 { background-color: #353337; }
 
 div.tooltip {
   position: absolute;
@@ -163,7 +163,7 @@ function ready(error, us, maptemplate) {
   maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.state; });
 
   //Appends chart headline
-  d3.select(".g-hed").text("");
+  d3.select(".g-hed").text("CHOROPLETH MAP OF OPIOID DEATHS COUNTS BY STATE.");
 
   //Appends chart intro text
   d3.select(".g-intro").text("");
