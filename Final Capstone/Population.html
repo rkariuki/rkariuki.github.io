@@ -40,7 +40,7 @@ body {
   stroke-linejoin: round;
 }
 
-.q0-9 { fill: #ffeaa; }
+.q0-9 { fill: #FFEAAA; }
 .q1-9 { fill: #AA8E39; }
 .q2-9 { fill: #96A537; }
 .q3-9 { fill: #68266F; }
@@ -163,7 +163,7 @@ function ready(error, us, maptemplate) {
   maptemplate.forEach(function(d) { stateByFIPS[d.FIPS] = d.state; });
 
   //Appends chart headline
-  d3.select(".g-hed").text("Map that shows Opioid Deaths by state.");
+  d3.select(".g-hed").text(" Choropleth Map that shows Opioid Deaths by state.");
 
   //Appends chart intro text
   d3.select(".g-intro").text("");
